@@ -60,13 +60,13 @@ INCLUDE (CMakeBackwardCompatibilityC)
 
 #-----------------------------------------------------------------------------
 # Output directories.
-SET (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all libraries.")
-SET (EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all executables.")
+SET (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all libraries.")
+SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all executables.")
 #output directory for installing all include files.")
-MARK_AS_ADVANCED(LIBRARY_OUTPUT_PATH EXECUTABLE_OUTPUT_PATH)
-SET(Teem_LIBRARY_PATH "${LIBRARY_OUTPUT_PATH}")
-SET(Teem_EXECUTABLE_PATH "${EXECUTABLE_OUTPUT_PATH}")
-SET(C_TEST_PATH ${EXECUTABLE_OUTPUT_PATH})
+MARK_AS_ADVANCED(CMAKE_LIBRARY_OUTPUT_DIRECTORY CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+SET(Teem_LIBRARY_PATH "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+SET(Teem_EXECUTABLE_PATH "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+SET(C_TEST_PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 
 FILE(MAKE_DIRECTORY ${Teem_BINARY_DIR}/include)
@@ -468,7 +468,7 @@ CMAKE_EXPORT_BUILD_SETTINGS(${Teem_BINARY_DIR}/TeemBuildSettings.cmake)
 SET(CFLAGS "${CMAKE_C_FLAGS}")
 SET(CC "${CMAKE_C_COMPILER}")
 
-SET(Teem_EXECUTABLE_DIRS ${EXECUTABLE_OUTPUT_PATH} CACHE INTERNAL "Single output directory for building all executables.")
+SET(Teem_EXECUTABLE_DIRS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE INTERNAL "Single output directory for building all executables.")
 
 
 # Teem_CV_ prefixed variables are only used inside TeemConfig.cmake.in for
@@ -484,7 +484,7 @@ SET(Teem_EXECUTABLE_DIRS ${EXECUTABLE_OUTPUT_PATH} CACHE INTERNAL "Single output
 SET(Teem_CV_CONFIG_TO_ROOT ".")
 SET(Teem_CV_LIBRARY_DEPENDS_FILE ${Teem_BINARY_DIR}/TeemLibraryDepends.cmake)
 SET(Teem_CV_EXECUTABLE_DIRS ${Teem_EXECUTABLE_DIRS})
-SET(Teem_CV_LIBRARY_DIRS ${LIBRARY_OUTPUT_DIRECTORY})
+SET(Teem_CV_LIBRARY_DIRS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 SET(Teem_CV_USE_FILE ${Teem_SOURCE_DIR}/CMake/TeemUse.cmake)
 SET(Teem_CV_INCLUDE_DIRS "${Teem_BINARY_DIR}/include")
 SET(Teem_CV_BUILD_SETTINGS_FILE ${Teem_BINARY_DIR}/TeemBuildSettings.cmake)
