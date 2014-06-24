@@ -24,6 +24,10 @@
 #include "gage.h"
 #include "privateGage.h"
 
+#ifdef WIN32
+#define bzero(s,n) memset((s), 0, (n))
+#endif
+
 const char *
 _gageSigmaSamplingStr[] = {
   "(unknown_sampling)",
